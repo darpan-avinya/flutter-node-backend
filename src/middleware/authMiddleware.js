@@ -35,4 +35,17 @@ const protect = async (req, res, next) => {
   }
 };
 
-module.exports = { protect };
+// નવું RBAC Middleware: ફક્ત સ્પેસિફાઈ કરેલા roles ને જ એક્સેસ આપશે
+const authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: `Role '${req.user.role}' is not authorized to access this resource`
+      });
+    }
+    next();
+  };
+};
+
+module.exports = { protect, authorize };

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, getMyProfile } = require('../controllers/authController');
+const { registerUser, loginUser, getMyProfile, uploadAvatar, forgotPassword, resetPassword } = require('../controllers/authController');
+const upload = require('../middleware/uploadMiddleware');
 const { protect } = require('../middleware/authMiddleware');
 
 /**
@@ -92,5 +93,10 @@ router.post('/login', loginUser);
  *         description: Unauthorized token missing or invalid
  */
 router.get('/me', protect, getMyProfile); 
+
+// Upload Avatar Route
+router.put('/avatar', protect, upload.single('image'), uploadAvatar);
+router.post('/forgotpassword', forgotPassword);
+router.put('/resetpassword/:resetToken', resetPassword);
 
 module.exports = router;

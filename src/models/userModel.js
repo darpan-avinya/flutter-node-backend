@@ -24,7 +24,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Role is required'],
       default: 'Flutter Dev'
-    }
+    },
+    avatar: {
+      type: String,
+      default: ''
+    },
+    // avatar પછી આ બે ફીલ્ડ્સ ઉમેરી દો:
+resetPasswordToken: String,
+resetPasswordExpire: Date,
   },
   {
     timestamps: true // createdAt અને updatedAt ઓટોમેટિક ઉમેરશે

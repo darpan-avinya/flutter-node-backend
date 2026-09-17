@@ -13,6 +13,11 @@ connectDB();
 // Body-parser middleware (Flutter તરફથી આવતો JSON ડેટા રીડ કરવા)
 app.use(express.json());
 
+const path = require('path');
+
+// Uploads ફોલ્ડરને પબ્લિકલી એક્સેસિબલ બનાવો
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Main Routes
